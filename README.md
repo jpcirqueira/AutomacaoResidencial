@@ -6,7 +6,7 @@ Projeto 2 da disciplina de Fundamentos de Sistemas Embarcados (2020/2)
 
 Este trabalho tem por objetivo a criação de um sistema distribuído de automação residencial para monitoramento e acionamento de sensores e dispositivos. O sistema deve ser desenvolvido para funcionar em um conjunto de placas Raspberry Pi com um servidor central responsável pelo controle e interface com o usuário e servidores distribuídos para leitura e acionamento dos dispositivos. Dentre os dispositivos envolvidos estão o monitoramento de temperatura, sensores de presença, sensores de abertura e fechamento de portas e janelas, acionamento de lâmpadas, aparelhos de ar-condicionado e alarme.
 
-![Figura](/figuras/arquitetura.png)
+![Figura](/imagens/arquitetura.png)
 
 ## 2. Componentes do Sistema
 
