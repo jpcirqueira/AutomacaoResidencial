@@ -33,7 +33,6 @@ int main(){
   // int teste = ler_gpio(SENSOR_PRESENCA_01);
   // printf("%d\n",teste);
 
-
   // while (1)
   // {   
   //   float te = bme();
