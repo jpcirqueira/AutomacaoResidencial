@@ -4,23 +4,96 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <string.h>
+#include "../gpio/gpio.h"
+
+#define LAMPADA_01 0
+#define LAMPADA_02 1
+#define LAMPADA_03 2
+#define LAMPADA_04 3
+#define ARCONDICIONADO_01 23
+#define ARCONDICIONADO_02 24
+#define SENSOR_PRESENCA_01 6
+#define SENSOR_PRESENCA_02 25
+#define PORTA_COZINHA 21
+#define JANELA_COZINHA 22
+#define PORTA_SALA 26
+#define JANELA_SALA 27
+#define JANELA_QUARTO_01 28
+#define JANELA_QUARTO_02 29
 
 void TrataClienteTCP(int socketCliente) {
-	char buffer[16];
+	char buffer[2];
 	int tamanhoRecebido;
 
-	if((tamanhoRecebido = recv(socketCliente, buffer, 16, 0)) < 0)
+	if((tamanhoRecebido = recv(socketCliente, buffer, 2, 0)) < 0)
 		printf("Erro no recv()\n");
 
-	while (tamanhoRecebido > 0) {
-		if(send(socketCliente, buffer, tamanhoRecebido, 0) != tamanhoRecebido)
-			printf("Erro no envio - send()\n");
-		
-		if((tamanhoRecebido = recv(socketCliente, buffer, 16, 0)) < 0)
-			printf("Erro no recv()\n");
+	switch(atoi(buffer)) {
+    case 1: {
+        gpio_liga(LAMPADA_01);
+				send(socketCliente, "lampada 1 ligada", 20, 0);
+        break;
+    }
+		case 2: {
+				gpio_liga(LAMPADA_02);
+				send(socketCliente, "lampada 2 ligada\n", 20, 0);
+        break;
+    }
+		case 3: {
+				gpio_liga(LAMPADA_03);
+				send(socketCliente, "lampada 3 ligada\n", 20, 0);
+        break;
+    }
+		case 4: {
+				gpio_liga(LAMPADA_04);
+				send(socketCliente, "lampada 4 ligada\n", 20, 0);
+        break;
+    }
+		case 5: {
+				gpio_liga(ARCONDICIONADO_01);
+				send(socketCliente, "ar-condicionado 1 ligado\n", 30, 0);
+        break;
+    }
+		case 6: {
+				gpio_liga(ARCONDICIONADO_02);
+				send(socketCliente, "ar-condicionado 2 ligado\n", 30, 0);
+        break;
+    }
+		case 7: {
+				gpio_desliga(LAMPADA_01);
+				send(socketCliente, "lampada 1 desligada\n", 20, 0);
+        break;
+    }
+		case 8: {
+				gpio_desliga(LAMPADA_02);
+				send(socketCliente, "lampada 2 desligada\n", 20, 0);
+        break;
+    }
+		case 9: {
+				gpio_desliga(LAMPADA_03);
+				send(socketCliente, "lampada 3 desligada\n", 20, 0);
+        break;
+    }
+		case 10: {
+				gpio_desliga(LAMPADA_04);
+				send(socketCliente, "lampada 4 desligada\n", 20, 0);
+        break;
+    }
+		case 11: {
+				gpio_desliga(ARCONDICIONADO_01);
+				send(socketCliente, "ar-condicionado 1 desligado\n", 30, 0);
+        break;
+    }
+		case 12: {
+				gpio_desliga(ARCONDICIONADO_02);
+				send(socketCliente, "ar-condicionado 2 desligado\n", 30, 0);
+        break;
+    }
+    default: {
+        send(socketCliente, "ocorreu um erro ao receber mensaegm\n", 50, 0);
+    }
 	}
-	
-	printf("%s\n", buffer);
 }
 
 int servidor() {

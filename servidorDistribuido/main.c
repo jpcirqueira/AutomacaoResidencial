@@ -22,14 +22,13 @@
 #define JANELA_SALA 27
 #define JANELA_QUARTO_01 28
 #define JANELA_QUARTO_02 29
-
 int bmeErro =0;
 
 int main(){
   servidor();
   // gpio_liga(LAMPADA_01);
   // sleep(5);
-  // gpio_desliga(LAMPADA_01);
+  // gpio_desliga(ARCONDICIONADO_01);
   // int teste = ler_gpio(SENSOR_PRESENCA_01);
   // printf("%d\n",teste);
 

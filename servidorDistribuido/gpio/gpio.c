@@ -9,7 +9,6 @@ void gpio_liga(int pino){
         printf("erro ao iniciar wiringPi");
         exit(1);
     }
-    printf("%d\n",pino);
     pinMode(pino,OUTPUT);
     digitalWrite(pino, HIGH);
 }
