@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "../gpio/gpio.h"
+#include "../bme/bme280.h"
 
 #define LAMPADA_01 0
 #define LAMPADA_02 1
@@ -21,6 +22,27 @@
 #define JANELA_SALA 27
 #define JANELA_QUARTO_01 28
 #define JANELA_QUARTO_02 29
+
+float temperatura = 0;
+float umidade = 0;
+
+void bme()
+{
+  int i;
+  
+  int T=0,P, H;
+  i = bme280Init(1, 0x76);
+  if (i != 0)
+  {
+    printf("ocorreu um erro ao abrir o bme280 ira tentar novamente.\n");
+      exit(1);
+  }
+  
+  bme280ReadValues(&T, &P, &H);
+  T -= 150;
+  temperatura = (float)T/100.0;
+	umidade = (float)H/1024;
+} 
 
 void TrataClienteTCP(int socketCliente) {
 	char buffer[2];
@@ -90,8 +112,23 @@ void TrataClienteTCP(int socketCliente) {
 				send(socketCliente, "ar-condicionado 2 desligado\n", 30, 0);
         break;
     }
+		case 13: {
+			bme();
+			char response[30];
+			char temperatura_aux[9];
+			char umidade_aux[9];
+			gcvt(temperatura, 4, temperatura_aux);
+			gcvt(umidade, 2, umidade_aux);
+			strcat(response, "Temperatura: ");
+			strcat(response, temperatura_aux);
+			strcat(response, " Umidade: ");
+			strcat(response, umidade_aux);
+			strcat(response, "\n");
+			send(socketCliente, response, 50, 0);
+			break;
+    }
     default: {
-        send(socketCliente, "ocorreu um erro ao receber mensaegm\n", 50, 0);
+      send(socketCliente, "ocorreu um erro ao receber mensaegm\n", 50, 0);
     }
 	}
 }
