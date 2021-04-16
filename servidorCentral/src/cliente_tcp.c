@@ -50,5 +50,4 @@ int cliente(char *msg) {
 		printf("%s\n", buffer);
 	}
 	close(clienteSocket);
-	// exit(0);
 }

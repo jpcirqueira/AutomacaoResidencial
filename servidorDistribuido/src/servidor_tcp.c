@@ -5,8 +5,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <string.h>
-#include "../gpio/gpio.h"
-#include "../bme/bme280.h"
+#include "../inc/gpio.h"
+#include "../inc/bme280.h"
 
 #define LAMPADA_01 0
 #define LAMPADA_02 1
@@ -14,14 +14,7 @@
 #define LAMPADA_04 3
 #define ARCONDICIONADO_01 23
 #define ARCONDICIONADO_02 24
-#define SENSOR_PRESENCA_01 6
-#define SENSOR_PRESENCA_02 25
-#define PORTA_COZINHA 21
-#define JANELA_COZINHA 22
-#define PORTA_SALA 26
-#define JANELA_SALA 27
-#define JANELA_QUARTO_01 28
-#define JANELA_QUARTO_02 29
+
 
 float temperatura = 0;
 float umidade = 0;
