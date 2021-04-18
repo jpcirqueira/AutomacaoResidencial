@@ -7,6 +7,7 @@
 
 char buffer[16];
 int alarme = 0;
+int servidorSocket;
 
 void setAlarme(int estadoAlarme) {
 	alarme = estadoAlarme;
@@ -22,7 +23,7 @@ void TrataClienteTCP(int socketCliente) {
 	if(alarme == 1){
 		printf("alarme tocando.\n");
 	}
-	
+
 	while (tamanhoRecebido > 0) {
 		if(send(socketCliente, buffer, tamanhoRecebido, 0) != tamanhoRecebido)
 			printf("Erro no envio - send()\n");
@@ -33,7 +34,6 @@ void TrataClienteTCP(int socketCliente) {
 }
 
 void servidor() {
-	int servidorSocket;
 	int socketCliente;
 	struct sockaddr_in servidorAddr;
 	struct sockaddr_in clienteAddr;
@@ -80,4 +80,8 @@ void servidor() {
 	}
 	close(servidorSocket);
 
+}
+
+void closeServidor() {
+	close(servidorSocket);
 }

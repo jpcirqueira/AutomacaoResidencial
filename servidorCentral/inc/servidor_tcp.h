@@ -3,4 +3,6 @@
 
 void servidor();
 void setAlarme(int estadoAlarme);
+void closeServidor();
+
 #endif

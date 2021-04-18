@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
+#include <stdlib.h>
 #include <pthread.h>
 #include "../inc/cliente_tcp.h"
 #include "../inc/servidor_tcp.h"
@@ -74,7 +75,13 @@ void menu(int sinal){
       printf("entrada invalida");
     }
 }
- 
+
+void sair(int sinal){
+  closeCliente();
+  closeServidor();
+  exit(0);
+}
+
 void *trata_alarme(void *s){  
   servidor();
 }
@@ -85,7 +92,7 @@ criaArquivo();
 pthread_create(&t1,NULL, trata_alarme,NULL);
 printf("para mostrar menu pressione ctrl + z\n");
 signal(SIGTSTP, menu);
-
+signal(SIGINT, sair);
 while(1){
   cliente("13");
   usleep(1000000);

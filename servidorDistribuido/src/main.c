@@ -22,7 +22,14 @@ void alarme(){
   cliente();
 }
 
+void sair(int sinal){
+  closeCliente();
+  closeServidor();
+  exit(0);
+}
+
 int main(){
+  signal(SIGINT, sair);
   int w = wiringPiSetup();
   if(w < 0){
       printf("erro ao iniciar wiringPi");

@@ -2,5 +2,6 @@
 #define __CLIENTE__
 
 void cliente();
+void closeCliente();
 
 #endif

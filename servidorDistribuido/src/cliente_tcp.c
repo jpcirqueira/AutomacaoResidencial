@@ -5,8 +5,9 @@
 #include <string.h>
 #include <unistd.h>
 
+int clienteSocket;
 void cliente(int argc, char *argv[]) {
-	int clienteSocket;
+	
 	struct sockaddr_in servidorAddr;
 	unsigned short servidorPorta;
 	char *IP_Servidor;
@@ -56,4 +57,8 @@ void cliente(int argc, char *argv[]) {
 	}
 	close(clienteSocket);
 	// exit(0);
+}
+
+void closeCliente(){
+	close(clienteSocket);
 }

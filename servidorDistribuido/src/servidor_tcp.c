@@ -18,7 +18,7 @@
 
 float temperatura = 0;
 float umidade = 0;
-
+int servidorSocket;
 void bme()
 {
   int i;
@@ -127,7 +127,6 @@ void TrataClienteTCP(int socketCliente) {
 }
 
 int servidor() {
-	int servidorSocket;
 	int socketCliente;
 	struct sockaddr_in servidorAddr;
 	struct sockaddr_in clienteAddr;
@@ -167,4 +166,8 @@ int servidor() {
 	}
 	close(servidorSocket);
 
+}
+
+void closeServidor() {
+	close(servidorSocket);
 }

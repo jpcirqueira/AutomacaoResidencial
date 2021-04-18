@@ -2,5 +2,5 @@
 #define __SERVIDOR__
 
 void servidor();
-
+void closeServidor(); 
 #endif
