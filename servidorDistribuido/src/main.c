@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "../inc/gpio.h"
 #include "../inc/servidor_tcp.h"
+#include "../inc/cliente_tcp.h"
 #include "wiringPi.h"
 
 #define SENSOR_PRESENCA_01 6
@@ -18,7 +19,7 @@
 #define JANELA_QUARTO_02 29
 
 void alarme(){
-  printf("detectou presença.");
+  cliente();
 }
 
 int main(){
@@ -28,19 +29,16 @@ int main(){
       exit(1);
   }
 
-  //wiringPiISR(SENSOR_PRESENCA_01,HIGH,alarme());
+  wiringPiISR(SENSOR_PRESENCA_01,INT_EDGE_RISING,alarme);
+  wiringPiISR(SENSOR_PRESENCA_02,INT_EDGE_RISING,alarme);
+  wiringPiISR(PORTA_COZINHA,INT_EDGE_RISING,alarme);
+  wiringPiISR(JANELA_COZINHA,INT_EDGE_RISING,alarme);
+  wiringPiISR(PORTA_SALA,INT_EDGE_RISING,alarme);
+  wiringPiISR(JANELA_SALA,INT_EDGE_RISING,alarme);
+  wiringPiISR(JANELA_QUARTO_01,INT_EDGE_RISING,alarme);
+  wiringPiISR(JANELA_QUARTO_02,INT_EDGE_RISING,alarme);
   servidor();
-  // gpio_liga(LAMPADA_01);
-  // sleep(5);
-  // gpio_desliga(ARCONDICIONADO_01);
-  // int teste = ler_gpio(SENSOR_PRESENCA_01);
-  // printf("%d\n",teste);
 
-  // while (1)
-  // {   
-  //   float te = bme();
-  //   printf("%f\n",te);
-  // }
 return 0;
 }
 
