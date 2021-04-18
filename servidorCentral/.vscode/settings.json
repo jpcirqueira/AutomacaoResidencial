@@ -5,6 +5,8 @@
     ".prettierrc": "json",
     "*.tsx": "typescriptreact",
     "cliente_tcp.h": "c",
-    "pthread.h": "c"
+    "pthread.h": "c",
+    "string.h": "c",
+    "servidor_tcp.h": "c"
   }
 }
