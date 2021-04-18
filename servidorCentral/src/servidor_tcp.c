@@ -6,6 +6,11 @@
 #include <unistd.h>
 
 char buffer[16];
+int alarme = 1;
+
+void setAlarme(int estadoAlarme) {
+	alarme = estadoAlarme;
+}
 
 void TrataClienteTCP(int socketCliente) {
 	
@@ -14,6 +19,9 @@ void TrataClienteTCP(int socketCliente) {
 	if((tamanhoRecebido = recv(socketCliente, buffer, 16, 0)) < 0)
 		printf("Erro no recv()\n");
 
+	if(alarme == 1){
+		printf("alarme tocando.");
+	}
 	while (tamanhoRecebido > 0) {
 		if(send(socketCliente, buffer, tamanhoRecebido, 0) != tamanhoRecebido)
 			printf("Erro no envio - send()\n");

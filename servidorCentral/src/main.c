@@ -6,7 +6,6 @@
 #include "../inc/servidor_tcp.h"
 
 int bmeErro =0;
-int alarme = 0;
 void menu(int sinal){
     printf("-----------------------------------Trabalho2---------------------------------\n");
     printf("|digite 1 liga lampada 1.                                                   |\n");
@@ -50,16 +49,14 @@ void menu(int sinal){
     }else if(entrada == 12) {
       cliente("12");
     }else if(entrada == 14) {
-      alarme = 1;
+      setAlarme(1);
     }else{
       printf("entrada invalida");
     }
 }
+ 
 void *trata_alarme(void *s){  
   servidor();
-  if(alarme == 1){
-    printf("alarme tocando.");
-  }
 }
 
 int main(){
@@ -69,7 +66,7 @@ printf("para mostrar menu pressione ctrl + z\n");
 signal(SIGTSTP, menu);
 
 while(1){
-  cliente("13");
+  //cliente("13");
   usleep(1000000);
 }  
 pthread_join(t1,NULL);
