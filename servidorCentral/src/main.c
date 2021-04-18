@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
+#include <pthread.h>
 #include "../inc/cliente_tcp.h"
-int bmeErro =0;
+#include "../inc/servidor_tcp.h"
 
+int bmeErro =0;
+int alarme = 0;
 void menu(int sinal){
     printf("-----------------------------------Trabalho2---------------------------------\n");
     printf("|digite 1 liga lampada 1.                                                   |\n");
@@ -46,24 +49,30 @@ void menu(int sinal){
       cliente("11");
     }else if(entrada == 12) {
       cliente("12");
+    }else if(entrada == 14) {
+      alarme = 1;
     }else{
       printf("entrada invalida");
     }
 }
-
-void manda_alarm(int sinal){
-  alarm(1);
+void *trata_alarme(void *s){  
+  servidor();
+  if(alarme == 1){
+    printf("alarme tocando.");
+  }
 }
 
 int main(){
+pthread_t t1;
+pthread_create(&t1,NULL, trata_alarme,NULL);
 printf("para mostrar menu pressione ctrl + z\n");
 signal(SIGTSTP, menu);
-signal(SIGALRM, manda_alarm);
+
 while(1){
-  alarm(1);
   cliente("13");
-  pause();
+  usleep(1000000);
 }  
+pthread_join(t1,NULL);
 return 0;
 }
 
