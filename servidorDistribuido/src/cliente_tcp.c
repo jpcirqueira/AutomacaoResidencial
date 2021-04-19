@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 int clienteSocket;
-void cliente(int argc, char *argv[]) {
+void cliente( char *msg) {
 	
 	struct sockaddr_in servidorAddr;
 	unsigned short servidorPorta;
@@ -25,7 +25,7 @@ void cliente(int argc, char *argv[]) {
 
 	IP_Servidor = "192.168.0.53";
 	servidorPorta = 10005;
-	mensagem = "possivel invasao";
+	mensagem = msg;
   
 	// Criar Socket
 	if((clienteSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
