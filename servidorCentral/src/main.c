@@ -73,8 +73,6 @@ void menu(int sinal){
       escreveArquivo("desliga alarme");
       setAlarme(0);
       printf("alarme desligado\n");
-    }else if(entrada == 15) {
-      cliente("14");
     }else{
       printf("entrada invalida");
     }
