@@ -14,7 +14,14 @@
 #define LAMPADA_04 3
 #define ARCONDICIONADO_01 23
 #define ARCONDICIONADO_02 24
-
+#define SENSOR_PRESENCA_01 6
+#define SENSOR_PRESENCA_02 25
+#define PORTA_COZINHA 21
+#define JANELA_COZINHA 22
+#define PORTA_SALA 26
+#define JANELA_SALA 27
+#define JANELA_QUARTO_01 28
+#define JANELA_QUARTO_02 29
 
 float temperatura = 0;
 float umidade = 0;
@@ -117,6 +124,59 @@ void TrataClienteTCP(int socketCliente) {
 			strcat(response, " Umidade: ");
 			strcat(response, umidade_aux);
 			strcat(response, "\n");
+			send(socketCliente, response, 50, 0);
+			break;
+    }
+		case 14: {
+			char response[50];
+			int s1 = ler_gpio(SENSOR_PRESENCA_01);
+			int s2 = ler_gpio(SENSOR_PRESENCA_02);
+			int pc = ler_gpio(PORTA_COZINHA);
+			int jc = ler_gpio(JANELA_COZINHA);
+			int ps = ler_gpio(PORTA_SALA);
+			int js = ler_gpio(JANELA_SALA);
+			int jq1 = ler_gpio(JANELA_QUARTO_01);
+			int jq2 = ler_gpio(JANELA_QUARTO_02);
+			if(s1 == 1){
+				strcat(response, "SENSOR1:ON,");
+			}else{
+				strcat(response, "SENSOR1:OFF,");
+			}
+			if(s2 == 1){
+				strcat(response, "SENSOR2:ON,");
+			}else{
+				strcat(response, "SENSOR2:OFF,");
+			}
+			if(pc == 1){
+				strcat(response, "PORTA_COZINHA:ON,");
+			}else{
+				strcat(response, "PORTA_COZINHA:OFF,");
+			}
+			if(jc == 1){
+				strcat(response, "JANELA_COZINHA:ON,");
+			}else{
+				strcat(response, "JANELA_COZINHA:OFF,");
+			}
+			if(ps == 1){
+				strcat(response, "PORTA_SALA:ON,");
+			}else{
+				strcat(response, "PORTA_SALA:OFF,");
+			}
+			if(js == 1){
+				strcat(response, "JANELA_SALA:ON,");
+			}else{
+				strcat(response, "JANELA_SALA:OFF,");
+			}
+			if(jq1 == 1){
+				strcat(response, "JANELA_QUARTO1:ON,");
+			}else{
+				strcat(response, "JANELA_QUARTO1:OFF,");
+			}
+			if(jq2 == 1){
+				strcat(response, "JANELA_QUARTO2:ON,");
+			}else{
+				strcat(response, "JANELA_QUARTO2:OFF,");
+			}										
 			send(socketCliente, response, 50, 0);
 			break;
     }
