@@ -22,6 +22,9 @@ void TrataClienteTCP(int socketCliente) {
 
 	if(alarme == 1){
 		printf("alarme tocando.\n");
+		while (alarme == 1) {
+    	system("cd ..; omxplayer alarme.mp3 > /dev/null");
+  	}
 	}
 
 	while (tamanhoRecebido > 0) {
