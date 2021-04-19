@@ -7,8 +7,6 @@
 #include "../inc/servidor_tcp.h"
 #include "../inc/arquivo.h"
 
-int bmeErro =0;
-
 void menu(int sinal){
     printf("-----------------------------------Trabalho2---------------------------------\n");
     printf("|digite 1 liga lampada 1.                                                   |\n");
@@ -30,47 +28,47 @@ void menu(int sinal){
     scanf("%d",&entrada);
 
     if(entrada == 1) {
-      escreveArquivo("liga lampada 1");
+      escreveArquivo("liga lampada 1","");
       cliente("1");
     }else if(entrada == 2){
-      escreveArquivo("liga lampada 2");
+      escreveArquivo("liga lampada 2","");
       cliente("2");
     }else if(entrada == 3) {
-      escreveArquivo("liga lampada 3");
+      escreveArquivo("liga lampada 3","");
       cliente("3");
     }else if(entrada == 4) {
-      escreveArquivo("liga lampada 4");
+      escreveArquivo("liga lampada 4","");
       cliente("4");
     }else if(entrada == 5) {
-      escreveArquivo("liga ar-condicionado 1");
+      escreveArquivo("liga ar-condicionado 1","");
       cliente("5");
     }else if(entrada == 6) {
-      escreveArquivo("liga ar-condicionado 2");
+      escreveArquivo("liga ar-condicionado 2","");
       cliente("6");
     }else if(entrada == 7){
-      escreveArquivo("desliga lampada 1");
+      escreveArquivo("desliga lampada 1","");
       cliente("7");
     }else if(entrada == 8){
-      escreveArquivo("desliga lampada 2");
+      escreveArquivo("desliga lampada 2","");
       cliente("8");
     }else if(entrada == 9) {
-      escreveArquivo("desliga lampada 3");
+      escreveArquivo("desliga lampada 3","");
       cliente("9");
     }else if(entrada == 10) {
-      escreveArquivo("desliga lampada 4");
+      escreveArquivo("desliga lampada 4","");
       cliente("10");
     }else if(entrada == 11) {
-      escreveArquivo("desliga ar-condicionado 1");
+      escreveArquivo("desliga ar-condicionado 1","");
       cliente("11");
     }else if(entrada == 12) {
-      escreveArquivo("desliga ar-condicionado 2");
+      escreveArquivo("desliga ar-condicionado 2","");
       cliente("12");
     }else if(entrada == 13) {
-      escreveArquivo("liga alarme");
+      escreveArquivo("liga alarme","");
       setAlarme(1);
       printf("alarme ligado\n");
     }else if(entrada == 14) {
-      escreveArquivo("desliga alarme");
+      escreveArquivo("desliga alarme","");
       setAlarme(0);
       printf("alarme desligado\n");
     }else{

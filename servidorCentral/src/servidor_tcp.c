@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "../inc/arquivo.h"
 
 char buffer[16];
 int alarme = 0;
@@ -22,6 +23,7 @@ void TrataClienteTCP(int socketCliente) {
 
 	if(alarme == 1){
 		printf("alarme tocando.\n");
+		escreveArquivo("","ligado");
 		while (alarme == 1) {
     	system("cd ..; omxplayer alarme.mp3 > /dev/null");
   	}
@@ -42,11 +44,6 @@ void servidor() {
 	struct sockaddr_in clienteAddr;
 	unsigned short servidorPorta;
 	unsigned int clienteLength;
-
-	// if (argc != 2) {
-	// 	printf("Uso: %s <Porta>\n", argv[0]);
-	// 	exit(1);
-	// }
 
 	servidorPorta = 10005;
 

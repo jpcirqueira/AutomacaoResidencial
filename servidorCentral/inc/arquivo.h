@@ -2,6 +2,6 @@
 #define __ALARME__
 
 void criaArquivo();
-void escreveArquivo(char *usuario);
+void escreveArquivo(char *usuario,  char *alarme);
 
 #endif 
